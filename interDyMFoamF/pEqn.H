@@ -88,41 +88,42 @@
     
 	List<scalar> nonDiag; // sums of non-diagonal elements
 
-	nonDiag.resize(p.size());
-	forAll(nonDiag, i)
-	{
-	    nonDiag[i] = 0.0;
-	}
-	
-	const lduAddressing& addr = UEqn.lduAddr();
-	const labelList& lowerAddr = addr.lowerAddr();
-	const labelList& upperAddr = addr.upperAddr();
-	
-	forAll(lowerAddr, i)
-	{
-// 	    A[lowerAddr[i]][upperAddr[i]] = pEqn.upper()[i];
-// 	    A[upperAddr[i]][lowerAddr[i]] = pEqn.lower()[i];
-	    nonDiag[lowerAddr[i]] += UEqn.upper()[i];
-	    nonDiag[upperAddr[i]] += UEqn.lower()[i];
-	}
-	
-	forAll(U.boundaryField(),I)
-	{
-	    const fvPatch &ptch=U.boundaryField()[I].patch();
-	    forAll(ptch,J)
-	    {
-		int w=ptch.faceCells()[J];
-// 		nonDiag[w]+=UEqn.internalCoeffs()[I][J];
-		Info << "nonDiag" << "[" << w << "]" << " = " << nonDiag[w]  << nl << endl;
-	    }
-	
-	}
-	
-	
-	forAll(UEqn.diag(),i)
-	    {
-	      F[i] = abs(UEqn.diag()[i])+abs(nonDiag[i]);
-	    }
+// // // 	nonDiag.resize(p.size());
+// // // 	forAll(nonDiag, i)
+// // // 	{
+// // // 	    nonDiag[i] = 0.0;
+// // // 	}
+// // // 	
+// // // 	const lduAddressing& addr = UEqn.lduAddr();
+// // // 	const labelList& lowerAddr = addr.lowerAddr();
+// // // 	const labelList& upperAddr = addr.upperAddr();
+// // // 	
+// // // 	forAll(lowerAddr, i)
+// // // 	{
+// // // // 	    A[lowerAddr[i]][upperAddr[i]] = pEqn.upper()[i];
+// // // // 	    A[upperAddr[i]][lowerAddr[i]] = pEqn.lower()[i];
+// // // 	    nonDiag[lowerAddr[i]] += UEqn.upper()[i];
+// // // 	    nonDiag[upperAddr[i]] += UEqn.lower()[i];
+// // // 	}
+// // // 	
+// // // 	forAll(U.boundaryField(),I)
+// // // 	{
+// // // 	    const fvPatch &ptch=U.boundaryField()[I].patch();
+// // // 	    forAll(ptch,J)
+// // // 	    {
+// // // 		int w=ptch.faceCells()[J];
+// // // // 		nonDiag[w]+=UEqn.internalCoeffs()[I][J];
+// // // 		Info << "nonDiag" << "[" << w << "]" << " = " << nonDiag[w]  << nl << endl;
+// // // 	    }
+// // // 	
+// // // 	}
+// // // 	
+// // // 	
+// // // 	forAll(UEqn.diag(),i)
+// // // 	    {
+// // // 	      F[i] = abs(UEqn.diag()[i])+abs(nonDiag[i]);
+// // // 	    }
+F = p;
 
 
     
