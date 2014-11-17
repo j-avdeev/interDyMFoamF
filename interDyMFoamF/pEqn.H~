@@ -95,19 +95,24 @@
 	}
 	
 
-// 	forAll(nonDiag,i)
 
 
-	forAll(p_rghEqn.diag(),i)
+// F = alpha1;
+// 	forAll(p_rghEqn.diag(),i)
+	forAll(nonDiag,i)
 	    {
-	      F[i] = p_rghEqn.diag()[i]+nonDiag[i];
+
+	      F[i] = -p_rghEqn.diag()[i]+nonDiag[i];
 // 	      F[i] = abs(nonDiag[i]);
 // 	      F[i] = abs(p_rghEqn.diag()[i])+abs(nonDiag[i]);
-	      Info << "p_rghEqn.diag()[i]=" << p_rghEqn.diag()[i] << nl << endl;
-	      Info << "nonDiag[i]=" << nonDiag[i] << nl << endl; 
+// 	      Info << "p_rghEqn.diag()[i]=" << p_rghEqn.diag()[i] << nl << endl;
+// 	      Info << "nonDiag[i]=" << nonDiag[i] << nl << endl; 
 	    }
        
-        
+        Info << "nonDiag.size()=" << nonDiag.size() << nl << endl;
+	Info << "alpha1.size()=" << alpha1.size() << nl << endl;
+	Info << "F.size()=" << F.size() << nl << endl;
+// 	Info << "p_rghEqn.size()=" << p_rghEqn.size() << nl << endl;
     }
 
     #include "continuityErrs.H"
