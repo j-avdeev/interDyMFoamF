@@ -121,7 +121,7 @@ F[i] = alpha1Eqn.diag()[i];
 // 	      F[i] = abs(nonDiag[i]);
 // 	      F[i] = abs(p_rghEqn.diag()[i])+abs(nonDiag[i]);
 // 	      Info << "p_rghEqn.diag()[i]=" << p_rghEqn.diag()[i] << nl << endl;
-// 	      Info << "alpha1Eqn.diag()=" << alpha1Eqn.diag() << nl << endl; 
+	      Info << "alpha1Eqn.diag()=" << alpha1Eqn.diag() << nl << endl; 
 	    }
        
         Info << "nonDiag.size()=" << nonDiag.size() << nl << endl;
