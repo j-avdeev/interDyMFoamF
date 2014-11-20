@@ -26,11 +26,11 @@
         mesh
     );
 
-    volScalarField F
+    volScalarField normalisedF
     (
         IOobject
         (
-            "F",
+            "normalisedF",
             runTime.timeName(),
             mesh,
             IOobject::MUST_READ,
@@ -38,7 +38,6 @@
         ),
         mesh
     );
-
 
     #include "createPhi.H"
 
