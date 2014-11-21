@@ -47,11 +47,9 @@
         );
 	
 	scalarField& D = p_rghEqn.diag(); //*
-// 	Info << "p_rghEqn = " << p_rghEqn << endl;
-// 	Info << "p_rghEqn.diag() = " << p_rghEqn.diag() << endl;
+
 	// Calculate the sum-mag off-diagonal from the interior faces
 	scalarField sumOff(D.size(), 0.0);
-// 	Info << "sumOff = " << sumOff << endl;
 
 	// Handle the boundary contributions to the diagonal
 	forAll(p_rgh.boundaryField(), patchI)
@@ -87,24 +85,23 @@
 	    }
 	}
 	
-//         tmp<volScalarField> F0 = mag(fvc::grad(p_rgh));
 	volScalarField F0
 	(
-            "F0",
+//             "F0",
             mag(fvc::grad(p_rgh))		// forDel!
         );
 // 	F0.internalField() = mag(D)+mag(sumOff);
-	F0.internalField() = mag(D)+mag(sumOff);
+// // 	F0.internalField() = mag(D)+mag(sumOff);
 // 	F0.internalField() = mag(D)+mag(sumOff);
-        volScalarField normalisedF
-        (
-            "normalisedF",
-            F0/max(F0)				// normalisation of F0
-        );
-        normalisedF.writeOpt() = IOobject::AUTO_WRITE;
-        F0.clear();
+// // //         volScalarField normalisedF
+// // //         (
+// // //             "normalisedF",
+// // //             F0/max(F0)				// normalisation of F0
+// // //         );
+// // //         normalisedF.writeOpt() = IOobject::AUTO_WRITE;
+// // //         F0.clear();
 	
-// 	F.internalField() = mag(D)+mag(sumOff);
+	normalisedF.internalField() = mag(D)+mag(sumOff);
 // 	Info << "F = " << F << endl;
 // 	Info << "F-mag(D) = " << F-mag(D) << endl;
 // 	Info << "mag(D)-mag(sumOff) = " << mag(D)-mag(sumOff) << endl;

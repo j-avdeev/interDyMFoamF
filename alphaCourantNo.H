@@ -50,8 +50,6 @@ if (mesh.nInternalFaces())
     meanAlphaCoNum =
         0.5*(gSum(sumPhi)/gSum(mesh.V().field()))*runTime.deltaTValue();
 
-Info<< "pos(3-5) =" << pos(3-5) << endl;
-
 }
 
 Info<< "Interface Courant Number mean: " << meanAlphaCoNum
