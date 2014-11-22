@@ -22,7 +22,7 @@ dynamicRefineFvMeshCoeffs
     // How often to refine
     refineInterval  1;
     // Field to be refinement on
-    field           F;
+    field           normalisedF;
     // Refine field inbetween lower..upper
     lowerRefineLevel 0.001;//0.00007;//0.001;
     upperRefineLevel 0.999;//0.0001;//0.999;

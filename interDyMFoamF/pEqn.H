@@ -45,67 +45,7 @@
         (
             fvm::laplacian(rAUf, p_rgh) == fvc::div(phiHbyA)
         );
-	
-	scalarField& D = p_rghEqn.diag(); //*
 
-	// Calculate the sum-mag off-diagonal from the interior faces
-	scalarField sumOff(D.size(), 0.0);
-
-	// Handle the boundary contributions to the diagonal
-	forAll(p_rgh.boundaryField(), patchI)
-	{
-	    const fvPatchField<scalar>& ptf = p_rgh.boundaryField()[patchI];
-
-	    if (ptf.size())
-	    {
-		const labelUList& pa = p_rghEqn.lduAddr().patchAddr(patchI);
-		scalarField& iCoeffs = p_rghEqn.internalCoeffs()[patchI];
-
-		if (ptf.coupled())
-		{
-		    const scalarField& pCoeffs = p_rghEqn.boundaryCoeffs()[patchI];
-
-		    // For coupled boundaries add the diagonal and
-		    // off-diagonal contributions
-		    forAll(pa, face)
-		    {
-			D[pa[face]] += component(iCoeffs[face], 0);
-			sumOff[pa[face]] += mag(component(pCoeffs[face], 0));
-		    }
-		}
-		else
-		{
-		    // For non-coupled boundaries add the maximum magnitude diagonal
-		    // contribution to ensure stability
-		    forAll(pa, face)
-		    {
-			D[pa[face]] += cmptMax(cmptMag(iCoeffs[face]));
-		    }
-		}
-	    }
-	}
-	
-	volScalarField F0
-	(
-//             "F0",
-            mag(fvc::grad(p_rgh))		// forDel!
-        );
-// 	F0.internalField() = mag(D)+mag(sumOff);
-// // 	F0.internalField() = mag(D)+mag(sumOff);
-// 	F0.internalField() = mag(D)+mag(sumOff);
-// // //         volScalarField normalisedF
-// // //         (
-// // //             "normalisedF",
-// // //             F0/max(F0)				// normalisation of F0
-// // //         );
-// // //         normalisedF.writeOpt() = IOobject::AUTO_WRITE;
-// // //         F0.clear();
-	
-	normalisedF.internalField() = mag(D)+mag(sumOff);
-// 	Info << "F = " << F << endl;
-// 	Info << "F-mag(D) = " << F-mag(D) << endl;
-// 	Info << "mag(D)-mag(sumOff) = " << mag(D)-mag(sumOff) << endl;
-	
         p_rghEqn.setReference(pRefCell, getRefCellValue(p_rgh, pRefCell));
 
         p_rghEqn.solve(mesh.solver(p_rgh.select(pimple.finalInnerIter())));
@@ -121,6 +61,58 @@
             fvOptions.correct(U);
         }
         
+
+// // // 	List<scalar> nonDiag; // sums of non-diagonal elements
+// // // 
+// // // 	nonDiag.resize(p.size());
+// // // 	forAll(nonDiag, i)
+// // // 	{
+// // // 	    nonDiag[i] = 0.0;
+// // // 	}
+// // // 	
+// // // 	const lduAddressing& addr = p_rghEqn.lduAddr();
+// // // 	const labelList& lowerAddr = addr.lowerAddr();
+// // // 	const labelList& upperAddr = addr.upperAddr();
+// // // 	
+// // // 	forAll(lowerAddr, i)
+// // // 	{
+// // // // 	    A[lowerAddr[i]][upperAddr[i]] = pEqn.upper()[i];
+// // // // 	    A[upperAddr[i]][lowerAddr[i]] = pEqn.lower()[i];
+// // // 	    nonDiag[lowerAddr[i]] += p_rghEqn.upper()[i];
+// // // 	    nonDiag[upperAddr[i]] += p_rghEqn.lower()[i];
+// // // 	}
+// // // 	
+// // // 	forAll(p.boundaryField(),I)
+// // // 	{
+// // // 	    const fvPatch &ptch=p.boundaryField()[I].patch();
+// // // 	    forAll(ptch,J)
+// // // 	    {
+// // // 		int w=ptch.faceCells()[J];
+// // // // 		nonDiag[w]+=UEqn.internalCoeffs()[I][J];
+// // // // // // 		Info << "nonDiag" << "[" << w << "]" << " = " << nonDiag[w]  << nl << endl;
+// // // 	    }
+// // // 	
+// // // 	}
+// // // 	
+// // // 
+// // // 
+// // // 
+// // // // F = alpha1;
+// // // // 	forAll(p_rghEqn.diag(),i)
+// // // 	forAll(nonDiag,i)
+// // // 	    {
+// // // 
+// // // 	      F[i] = -p_rghEqn.diag()[i]+nonDiag[i];
+// // // // 	      F[i] = abs(nonDiag[i]);
+// // // // 	      F[i] = abs(p_rghEqn.diag()[i])+abs(nonDiag[i]);
+// // // // 	      Info << "p_rghEqn.diag()[i]=" << p_rghEqn.diag()[i] << nl << endl;
+// // // // 	      Info << "nonDiag[i]=" << nonDiag[i] << nl << endl; 
+// // // 	    }
+// // //        
+// // //         Info << "nonDiag.size()=" << nonDiag.size() << nl << endl;
+// // // 	Info << "alpha1.size()=" << alpha1.size() << nl << endl;
+// // // 	Info << "F.size()=" << F.size() << nl << endl;
+// // // // 	Info << "p_rghEqn.size()=" << p_rghEqn.size() << nl << endl;
     }
 
     #include "continuityErrs.H"
