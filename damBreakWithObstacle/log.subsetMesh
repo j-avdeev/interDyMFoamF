@@ -7,11 +7,11 @@
 \*---------------------------------------------------------------------------*/
 Build  : 2.3.0-f5222ca19ce6
 Exec   : subsetMesh -overwrite c0 -patch walls
-Date   : Nov 17 2014
-Time   : 09:45:31
+Date   : Nov 21 2014
+Time   : 12:41:50
 Host   : "debian-toshiba"
-PID    : 4288
-Case   : /home/jenek/OFtutorials/damBreakWithObstacle
+PID    : 1841
+Case   : /home/jenek/interDyMFoamF/damBreakWithObstacle
 nProcs : 1
 sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
 fileModificationChecking : Monitoring run-time modified files using timeStampMaster
@@ -26,10 +26,10 @@ Reading cell set from c0
 
 Adding exposed internal faces to patch walls
 
-Subsetting field F
 Subsetting field alpha.water
 Subsetting field alpha.water.org
 Subsetting field p_rgh
+Subsetting field normalisedF
 Subsetting field U
 Writing subsetted mesh and fields to time 0
 

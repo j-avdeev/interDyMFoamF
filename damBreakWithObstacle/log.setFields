@@ -7,11 +7,11 @@
 \*---------------------------------------------------------------------------*/
 Build  : 2.3.0-f5222ca19ce6
 Exec   : setFields
-Date   : Nov 17 2014
-Time   : 09:45:32
+Date   : Nov 21 2014
+Time   : 12:41:51
 Host   : "debian-toshiba"
-PID    : 4289
-Case   : /home/jenek/OFtutorials/damBreakWithObstacle
+PID    : 1843
+Case   : /home/jenek/interDyMFoamF/damBreakWithObstacle
 nProcs : 1
 sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
 fileModificationChecking : Monitoring run-time modified files using timeStampMaster
@@ -26,7 +26,7 @@ Reading setFieldsDict
 
 Setting field default values
     Setting internal values of volScalarField alpha.water
-    Setting internal values of volScalarField F
+    Setting internal values of volScalarField normalisedF
     Setting internal values of volVectorField U
 
 Setting field region values

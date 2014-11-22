@@ -7,11 +7,11 @@
 \*---------------------------------------------------------------------------*/
 Build  : 2.3.0-f5222ca19ce6
 Exec   : topoSet
-Date   : Nov 17 2014
-Time   : 09:45:30
+Date   : Nov 21 2014
+Time   : 12:41:50
 Host   : "debian-toshiba"
-PID    : 4287
-Case   : /home/jenek/OFtutorials/damBreakWithObstacle
+PID    : 1839
+Case   : /home/jenek/interDyMFoamF/damBreakWithObstacle
 nProcs : 1
 sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
 fileModificationChecking : Monitoring run-time modified files using timeStampMaster
